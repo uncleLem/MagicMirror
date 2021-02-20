@@ -67,6 +67,7 @@ Special thanks to the following contributors: @Alvinger, @AndyPoms, @ashishtank,
 - Translator variables can have falsy values (e.g. empty string)
 - Fix issue with weather module with DEGREE label in FEELS like
 - Calendar module - option `showFullDayEventTime` allowing to hide the time for full day events in the relative display mode and customize date format
+- Added `descriptionReplace` option to newsfeed module
 
 ### Deleted
 

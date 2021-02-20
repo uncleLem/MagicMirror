@@ -35,6 +35,7 @@ Module.register("newsfeed", {
 		startTags: [],
 		endTags: [],
 		prohibitedWords: [],
+		descriptionReplace: {},
 		scrollLength: 500,
 		logFeedWarnings: false
 	},
@@ -166,7 +167,18 @@ Module.register("newsfeed", {
 			if (this.isShowingDescription) {
 				const description = document.createElement("div");
 				description.className = "newsfeed-desc small light" + (!this.config.wrapDescription ? " no-wrap" : "");
-				const txtDesc = this.newsItems[this.activeItem].description;
+				var txtDesc = this.newsItems[this.activeItem].description;
+				for (var needle in this.config.descriptionReplace) {
+					var replacement = this.config.descriptionReplace[needle];
+
+					var regParts = needle.match(/^\/(.+)\/([gim]*)$/);
+					if (regParts) {
+						// the parsed pattern is a regexp.
+						needle = new RegExp(regParts[1], regParts[2]);
+					}
+
+					txtDesc = txtDesc.replace(needle, replacement).trim();
+				}
 				description.innerHTML = this.config.truncDescription ? (txtDesc.length > this.config.lengthDescription ? txtDesc.substring(0, this.config.lengthDescription) + "..." : txtDesc) : txtDesc;
 				wrapper.appendChild(description);
 			}
