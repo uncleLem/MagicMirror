@@ -1,4 +1,4 @@
 #!/bin/sh
 
-git pull origin develop
+git rebase origin develop
 pm2 restart mm
